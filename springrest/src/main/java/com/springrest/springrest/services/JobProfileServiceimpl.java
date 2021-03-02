@@ -2,6 +2,7 @@ package com.springrest.springrest.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,34 @@ public class JobProfileServiceimpl implements JobProfileService {
 		}
 		return j;
 	}
+
+	@Override
+	public JobProfile addJobProfile(JobProfile jobProfile) {
+		list.add(jobProfile);
+		return jobProfile;
+	}
+
+	@Override
+	public JobProfile updateJobProfile(JobProfile jobProfile) {
+
+		list.forEach(e	-> {
+			if(e.getId() == jobProfile.getId())
+			{
+				e.setDepartment(jobProfile.getDepartment());
+				e.setDesignation(jobProfile.getDesignation());
+			}
+			
+		});
+		return jobProfile;
+	}
+
+	@Override
+	public void deleteJobProfile(long jobProfileId) {
+		list = this.list.stream().filter(e->e.getId() != jobProfileId).collect(Collectors.toList());
+	}
+		
+	}
+
+
 	
 
-}
