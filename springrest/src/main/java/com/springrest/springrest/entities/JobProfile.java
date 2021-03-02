@@ -1,6 +1,12 @@
 package com.springrest.springrest.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class JobProfile {
+	
+	@Id 
 	private long id;
 	private String Designation;
 	private String Department;
