@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.springrest.springrest.entities.JobProfile;
 
+// Declaration Of all the Job Services
 public interface JobProfileService {
 
 	public List<JobProfile> getJobProfiles();

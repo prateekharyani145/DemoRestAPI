@@ -1,8 +1,9 @@
 package com.springrest.springrest.services;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,80 +11,58 @@ import org.springframework.stereotype.Service;
 import com.springrest.springrest.dao.JobProfileDao;
 import com.springrest.springrest.entities.JobProfile;
 
+//Implementation Of the Job Services
+
+@Transactional
 @Service
 public class JobProfileServiceimpl implements JobProfileService {
 
 	@Autowired
 	private JobProfileDao jobProfileDao;
-	
-//	List<JobProfile> list;
-//	
-//	public JobProfileServiceimpl() {
-//		list = new ArrayList<>();
-//		list.add(new JobProfile(101,"Associate Application Engineer","Software Department"));
-//		list.add(new JobProfile(102,"Member Of Technical Staff","Software Department"));
-//	}
-	
+
+	// Find All Job Profiles
 	@Override
 	public List<JobProfile> getJobProfiles() {
-	
-		return jobProfileDao.findAll();
-//		return list;
-	
-	}
 
+		return jobProfileDao.findAll();
+	}
+	
+	// Find Particular Job Profile by ID
 	@Override
 	public JobProfile getJobProfile(long jobProfileId) {
-		
-		return jobProfileDao.getOne(jobProfileId);
-//		JobProfile j = null;
-//		for(JobProfile jobProfile : list) {
-//			if( jobProfile.getId() ==	jobProfileId) {
-//				j = jobProfile;
-//				break;
-//			}
-//		}
-//		return j;
-	
+
+		JobProfile profile = null;
+		Optional<JobProfile> jobProfile = jobProfileDao.findById(jobProfileId); 
+		if(jobProfile.isPresent())
+			profile = jobProfile.get();
+		return profile;
 	}
 	
+	// Add New Job Profile
 	@Override
 	public JobProfile addJobProfile(JobProfile jobProfile) {
 
 		jobProfileDao.save(jobProfile);
 		return jobProfile;
-//		list.add(jobProfile);
-//		return jobProfile;
-	
 	}
-
+	
+	// Update Particuar Job Profile By ID . If ID not found then create new Job Profile
 	@Override
 	public JobProfile updateJobProfile(JobProfile jobProfile) {
 
 		jobProfileDao.save(jobProfile);
 		return jobProfile;
-//		list.forEach(e	-> {
-//			if(e.getId() == jobProfile.getId())
-//			{
-//				e.setDepartment(jobProfile.getDepartment());
-//				e.setDesignation(jobProfile.getDesignation());
-//			}
-//			
-//		});
-//		return jobProfile;
-
 	}
 
+	// Delete Particular Job Profile By ID
 	@Override
 	public void deleteJobProfile(long jobProfileId) {
 
 		JobProfile entity = jobProfileDao.getOne(jobProfileId);
 		jobProfileDao.delete(entity);
-		//		list = this.list.stream().filter(e->e.getId() != jobProfileId).collect(Collectors.toList());
-	
 	}
 		
-	}
+}
 
 
 	
