@@ -1,32 +1,13 @@
 package com.springrest.springrest.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "JobProfile")
+@Document(collection = "JobProfile")
 public class JobProfile {
-    @NotNull(message = "Id cannot be null")
-    @Column(name = "id",nullable = false)
-    @Id 
+	@Id
 	private long id;
-	
-    @Pattern(regexp="(^[a-zA-Z ]*$)",message = "Designation is invalid")
-    @NotBlank(message = "Designation not be empty")
-    @Size(min = 2 , message = "Designation Must have atleast 2 Character")
-    @Column(name="Designation")
 	private String Designation;
-
-    @Pattern(regexp="(^[a-zA-Z ]*$)",message = "Department is invalid")
-    @NotBlank(message = "Department can not be empty")
-    @Size(min = 2 , message = "Department Must have atleast 2 Character")
-    @Column(name="Department")
 	private String Department;
 	
 	

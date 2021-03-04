@@ -2,7 +2,6 @@ package com.springrest.springrest.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,13 +45,13 @@ public class JobProfileController {
 	
 	// Create new Job Profile
 	@PostMapping(path = "/JobProfile" , consumes = "application/json")
-	public JobProfile addJobProfile(@Valid @RequestBody JobProfile jobProfile ) {
+	public JobProfile addJobProfile(@RequestBody JobProfile jobProfile ) {
 		return this.jobProfileService.addJobProfile(jobProfile);
 	}
 	
 	// Update Job Profile By ID . If ID not found Create new Job Profile
 	@PutMapping(path = "/JobProfile/{jobProfileId}")
-	public JobProfile updateJobProfile(@Valid @RequestBody JobProfile jobProfile) {
+	public JobProfile updateJobProfile( @RequestBody JobProfile jobProfile) {
 		return this.jobProfileService.updateJobProfile(jobProfile);
 	}
 	

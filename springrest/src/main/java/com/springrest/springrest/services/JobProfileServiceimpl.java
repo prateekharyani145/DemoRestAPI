@@ -3,8 +3,6 @@ package com.springrest.springrest.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +10,6 @@ import com.springrest.springrest.dao.JobProfileDao;
 import com.springrest.springrest.entities.JobProfile;
 
 //Implementation Of the Job Services
-
-@Transactional
 @Service
 public class JobProfileServiceimpl implements JobProfileService {
 
@@ -58,8 +54,7 @@ public class JobProfileServiceimpl implements JobProfileService {
 	@Override
 	public void deleteJobProfile(long jobProfileId) {
 
-		JobProfile entity = jobProfileDao.getOne(jobProfileId);
-		jobProfileDao.delete(entity);
+		jobProfileDao.deleteById(jobProfileId);
 	}
 		
 }
